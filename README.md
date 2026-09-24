@@ -65,3 +65,12 @@ git push
 ```
 
 Use the same workflow for `frontend` and `cli`. The superproject commit and the submodule commit are separate records.
+
+## Generated bundle
+
+The `bundle/` submodule is generated release output containing the Bun server, built Angular UI, and CLI. Do not edit it by hand. Regenerate it from the source submodules with:
+
+```bash
+node scripts/build-bundle.mjs
+node scripts/build-bundle.mjs --push
+```
