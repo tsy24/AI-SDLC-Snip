@@ -74,17 +74,13 @@ if (!existsSync(path.join(frontendOutput, 'index.html'))) {
 }
 
 await writeGeneratedFiles();
-const bundleChanged = commitIfChanged(bundleDir, 'Generate bundle output');
+commitIfChanged(bundleDir, 'Generate bundle output');
 
-if (shouldPush && bundleChanged) {
+if (shouldPush) {
     runGit(['push', 'origin', 'HEAD:bundle'], bundleDir);
-} else if (shouldPush) {
-    console.log('Bundle unchanged; no bundle push needed.');
 }
 
-const pointerChanged = commitIfChanged(root, 'Bump bundle submodule');
-if (shouldPush && pointerChanged) {
+commitIfChanged(root, 'Bump bundle submodule');
+if (shouldPush) {
     runGit(['push', 'origin', 'main'], root);
-} else if (shouldPush) {
-    console.log('Main unchanged; no main push needed.');
 }
